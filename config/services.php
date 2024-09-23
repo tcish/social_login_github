@@ -39,7 +39,16 @@ return [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => '/auth/github/callback',
-        'guzzle' => [
+        'guzzle' => [ // ! this should be remove in production
+            'verify' => false,
+        ],
+    ],
+
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+        'guzzle' => [ // ! this should be remove in production
             'verify' => false,
         ],
     ],

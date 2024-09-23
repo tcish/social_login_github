@@ -16,6 +16,9 @@ class SocialLoginController extends Controller
 
     public function callback($provider) {
         $socialUser = Socialite::driver($provider)->user();
+        if(User::where("email", $socialUser->getEmail())->exists()) {
+            return redirect("/login")->withErrors(["email" => "This email is already in use, try different method"]);
+        }
 
         $user = User::updateOrCreate([
             'provider_id' => $socialUser->id,
